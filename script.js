@@ -423,4 +423,449 @@ console.log(check.totalCost());
 */
 
 //3
+/*
+function writeP(styleMap, text){
+    if(!(styleMap instanceof Map)){
+        throw new TypeError("Wrong type!");
+    }
+    let strStyle = 'style="';
+    for (const item of styleMap) {
+        strStyle += `${item[0]}:${item[1]};`;
+    }
+    strStyle+='"';
+    document.write(`<p ${strStyle}>${text}</p>`); //в задании было указано использование document.write(), хоть он больше и не используется
+}
+let styleMap = new Map();
+styleMap.set("color", "red");
+styleMap.set("background-color", "darkblue");
+writeP(styleMap, "cool");
+styleMap.set("color", "darkblue");
+styleMap.set("background-color", "red");
+writeP(styleMap, "cooler");
+*/
 
+//4
+/*
+class Group{
+    constructor(title, students, faculty){
+        if(!(typeof students === "number")){
+            throw new TypeError("Wrong type!");
+        }
+        if(!(typeof title === "string")){
+            throw new TypeError("Wrong type!");
+        }
+        if(!(typeof faculty === "string")){
+            throw new TypeError("Wrong type!");
+        }
+        if(students<1||students>20){
+            throw new Error("Wrong students quantity");
+        }
+        this.title = title;
+        this.students = students;
+        this.faculty = faculty;
+    }
+}
+class Auditory{
+    constructor(title, places, faculty){
+        if(!(typeof places === "number")){
+            throw new TypeError("Wrong type!");
+        }
+        if(!(typeof title === "string")){
+            throw new TypeError("Wrong type!");
+        }
+        if(!(typeof faculty === "string")){
+            throw new TypeError("Wrong type!");
+        }
+        if(places<10||places>20){
+            throw new Error("Wrong places quantity");
+        }
+        this.title = title;
+        this.places = places;
+        this.faculty = faculty;
+    }
+    toString(){
+        return `${this.title} для ${this.faculty}, вмещает ${this.places} студентов`;
+    }
+    static comparePlaces(aud1, aud2){
+        if(!(aud1 instanceof Auditory)){
+            throw new TypeError("Wrong type!");
+        }
+        if(!(aud2 instanceof Auditory)){
+            throw new TypeError("Wrong type!");
+        }
+        return aud1.places-aud2.places;
+    }
+    static compareTitles(aud1, aud2){
+        if(!(aud1 instanceof Auditory)){
+            throw new TypeError("Wrong type!");
+        }
+        if(!(aud2 instanceof Auditory)){
+            throw new TypeError("Wrong type!");
+        }
+        if(aud1.title < aud2.title) { return -1; }
+        if(aud1.title > aud2.title) { return 1; }
+        return 0;
+    }
+    static checkFaculty(auditory){
+        if(!(auditory instanceof Auditory)){
+            throw new TypeError("Wrong type!");
+        }
+        if(!(typeof this === "string")){
+            throw new TypeError("Wrong type!");
+        }
+        return auditory.faculty===this;
+    }
+    static checkGroup(auditory){
+        if(!(auditory instanceof Auditory)){
+            throw new TypeError("Wrong type!");
+        }
+        if(!(this instanceof Group)){
+            throw new TypeError("Wrong type!");
+        }
+        return this.faculty === auditory.faculty && this.students <= auditory.places;
+    }
+}
+let auditories = [
+    new Auditory("101", 20, "Computer Science"),
+    new Auditory("202", 15, "Aerospace engineering"),
+    new Auditory("303", 10, "Computer Science")
+];
+let group = new Group("FSDE_12013_ru", 12, "Computer Science");
+Array.tabToString = (array)=>{
+    return array.join("\n");
+}
+Array.log = (array)=>{
+    console.log(Array.tabToString(array));
+}
+Array.log(auditories);
+auditories.sort(Auditory.comparePlaces);
+Array.log(auditories);
+auditories.sort(Auditory.compareTitles);
+Array.log(auditories);
+Array.log(auditories.filter(Auditory.checkFaculty, "Computer Science"));
+Array.log(auditories.filter(Auditory.checkGroup, group));
+*/
+
+
+
+
+
+
+
+
+//Tasks 3
+//1
+/*
+function info(str){
+    let infObj = {letterCount: 0, digitCount: 0, otherCount: 0};
+    for (const char of str) {
+        if(char>='a' && char<='z'){
+            infObj.letterCount++;
+        }
+        else if(char>='A' && char<='Z'){
+            infObj.letterCount++;
+        }
+        else if(char>='0' && char<='9'){
+            infObj.digitCount++;
+        }
+        else{
+            infObj.otherCount++;
+        }
+    }
+    return infObj;
+}
+let infObj = info("abc12&"); 
+console.log(infObj);
+*/
+
+//2
+/*
+function info(int){
+    if(!(typeof int === "number")){
+        throw new TypeError("Wrong type!");
+    }
+    if(!Number.isInteger(int)){
+        throw new TypeError("Wrong number!");
+    }
+    if(int<10||int>99){
+        throw new TypeError("Wrong integer!");
+    }
+    let str = `${int} - `;
+    if(int >= 10 && int <20){
+        switch (int) {
+            case 10:
+                str += "десять";
+                break;
+            case 11:
+                str += "одиннадцать";
+                break;
+            case 12:
+                str += "двенадцать";
+                break;
+            case 13:
+                str += "тринадцать";
+                break;
+            case 14:
+                str += "четырнадцать";
+                break;
+            case 15:
+                str += "пятнадцать";
+                break;
+            case 16:
+                str += "шестнадцать";
+                break;
+            case 17:
+                str += "семнадцать";
+                break;
+            case 18:
+                str += "восемнадцать";
+                break;
+            case 19:
+                str += "девятнадцать";
+                break;
+        }
+    }
+    else{
+        switch(Math.floor(int/10)){
+            case 2:
+                str+="двадцать";
+                break;
+            case 3:
+                str+="тридцать";
+                break;
+            case 4:
+                str+="сорок";
+                break;
+            case 5:
+                str+="пятьдесят";
+                break;
+            case 6:
+                str+="шестьдесят";
+                break;
+            case 7:
+                str+="семьдесят";
+                break;
+            case 8:
+                str+="восемьдесят";
+                break;
+            case 9:
+                str+="девяносто";
+                break;
+        }
+        if(int%10!==0){
+            str+=" ";
+        }
+        switch(int%10){
+            case 1:
+                str+="один";
+                break;
+            case 2:
+                str+="два";
+                break;
+            case 3:
+                str+="три";
+                break;
+            case 4:
+                str+="четыре";
+                break;
+            case 5:
+                str+="пять";
+                break;
+            case 6:
+                str+="шесть";
+                break;
+            case 7:
+                str+="семь";
+                break;
+            case 8:
+                str+="восемь";
+                break;
+            case 8:
+                str+="девять";
+                break;
+        }
+    }
+    return str;
+}
+console.log(info(35));
+console.log(info(89));
+console.log(info(10));
+console.log(info(15));
+console.log(info(19));
+console.log(info(20));
+console.log(info(21));
+console.log(info(12));
+*/
+
+//3
+/*
+function alter(str){
+    if(!(typeof str === "string")){
+        throw new TypeError("Wrong type!");
+    }
+    let tmp = "";
+    for (const char of str) {
+        if(char>='a' && char<='z'){
+            tmp+=char.toUpperCase();
+        }
+        else if(char>='A' && char<='Z'){
+            tmp+=char.toLowerCase();
+        }
+        else if(char>='0' && char<='9'){
+            tmp+="_";
+        }
+        else{
+            tmp+=char;
+        }
+    }
+    return tmp;
+}
+console.log(alter("Ab12!"));
+*/
+
+//4
+/*
+function camelize(str){
+    if(!(typeof str === "string")){
+        throw new TypeError("Wrong type!");
+    }
+    let tmp = "";
+    let upper = false;
+    for (const char of str) {
+        if(char==='-'){
+            upper=true;
+        }
+        else{
+            tmp+=upper?char.toUpperCase():char;
+            upper=false;
+        }
+    }
+    return tmp;
+}
+console.log(camelize("font-size"));
+console.log(camelize("background-color"));
+console.log(camelize("text-align"));
+*/
+
+//5
+/*
+function abbreviaturize(str){
+    if(!(typeof str === "string")){
+        throw new TypeError("Wrong type!");
+    }
+    let tmp = "";
+    let upper = true;
+    for (const char of str) {
+        if(char==='-'||char===' '){
+            upper = true;
+        }
+        else{
+            if(upper===true){
+                tmp+=char.toLocaleUpperCase();
+                upper = false;
+            }
+        }
+    }
+    return tmp;
+}
+console.log(abbreviaturize("cascading style sheets"));
+console.log(abbreviaturize("объектно-ориентированное программирование"));
+*/
+
+//6
+/*
+function merge(...strs){
+    return strs.join(" ");
+}
+console.log(merge("abc", "абв", "string", "строка"));
+*/
+
+//7
+//напишите мне если я уж слишком ленив ;)
+/*
+function calc(str){
+    if(!(typeof str === "string")){
+        throw new TypeError("Wrong type!");
+    }
+    return eval(str);
+}
+console.log(calc("100+150*2"));
+*/
+
+//8
+/*
+function info(url){
+    if(!(typeof url === "string")){
+        throw new TypeError("Wrong type!");
+    }
+    let infObj = {protocol: null, domain: null, path: null};
+    if(url.startsWith("http")){
+        infObj.protocol = url.slice(0, url.indexOf("://"));
+        url = url.slice(url.indexOf("://")+3);
+    }
+    if(url.indexOf("/") === -1){
+        infObj.domain = url;
+        return infObj;
+    }
+    infObj.domain = url.slice(0, url.indexOf("/"));
+    infObj.path = url.slice(url.indexOf("/"));
+    return infObj;
+}
+console.log(info("https://itstep.org/ua/about"));
+*/
+
+//9
+/*
+function customSplit(str, separator){
+    if(!(typeof str === "string")){
+        throw new TypeError("Wrong type!");
+    }
+    if(!(typeof separator === "string")){
+        throw new TypeError("Wrong type!");
+    }
+    let arr = [];
+    while (str.indexOf(separator) !== -1) {
+        arr.push(str.slice(0, str.indexOf(separator)));
+        str = str.slice(str.indexOf(separator)+separator.length);
+    }
+    if(str.length>0){
+        arr.push(str);
+    }
+    return arr;
+}
+console.log(customSplit("10/x/08/x/2020/x/", "/x/"));
+*/
+
+//10
+function print(str, ...args){
+    if(!(typeof str === "string")){
+        throw new TypeError("Wrong type!");
+    }
+    let substr = "";
+    let i = 0
+    let isArg = false, start = -1, end = -1;
+    for (const char of str) {
+        if(char==='%'){
+            start = i+1;
+            end = i+1;
+            isArg = true;
+        }
+        else if(isArg === true){
+            if(Number.parseInt(char) != NaN && char != " " && char !="." && char !=","){
+                end++;
+            }
+            else{
+                let index = Number.parseInt(str.slice(start, end+1));
+                substr += args[index-1];
+                substr+=char;
+                isArg = false;
+            }
+        }
+        else{
+            substr+=char;
+        }
+        i++;
+    }
+    return substr;
+}
+console.log(print("Today is %1 %2.%3.%4 hi", "Monday", 10, 8, 2020));
